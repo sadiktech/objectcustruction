@@ -1,0 +1,10 @@
+{
+ "Name" : "Sadik",
+ "Organ" : "Comviva",
+ "Address": {
+ 	"CITY" : "Delhi",
+ 	"Sec" : 1,
+ 	"Houseno" : 2589 
+ }	
+
+}

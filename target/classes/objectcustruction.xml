@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd">
+    <flow name="objectcustructionFlow">
+        <dw:transform-message doc:name="Transform Message">
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+%var oneValue = 
+	{
+		"name" : "Sadik",
+		"Place" : "MZP",
+		"sunData" : {
+			"height" : 5
+		}
+	}
+%var twoValue = {"age" : 33} 
+
+
+---
+result : {
+	objectValue :  flattenObjectArray(oneValue)
+}]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+    <flow name="objectcustructionFlow1">
+        <dw:transform-message doc:name="Transform Message" metadata:id="bbf1a3a7-263e-4ffb-b664-75bdb34d25f6">
+            <dw:input-payload doc:sample="jsonValuation\SampleJson.json" mimeType="application/json"/>
+            <dw:set-payload><![CDATA[%dw 1.0
+%output application/json
+%function flattenObjectArray(payload)
+	{(payload)}
+%var samplejson  = {"Class" : 11,"book":"Science"} 
+
+%function flattenObjectArrayConsolidated(payload)
+	{(payload),("Sadik":"Ali")}
+
+
+
+---
+flattenObjectArrayConsolidated(payload)]]></dw:set-payload>
+        </dw:transform-message>
+    </flow>
+</mule>
